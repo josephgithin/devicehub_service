@@ -40,15 +40,17 @@ function disconnect() {
     console.log("Disconnected");
 }
 
-//0INPUT
-//2INPUT_PULLUP
-//1OUTPUT
-
-
-function send(){
-ws.send("REQUEST_"+document.getElementById("device").value+"_"+document.getElementById("device").value+";"+document.getElementById("component").value+";"+document.getElementById("componentValue").value);
+function send(state){
+ws.send("REQUEST_"+document.getElementById("device").value+"_"+document.getElementById("component").value+"="+state);
 }
 
+function sendOn(){
+send('ON');
+}
+
+function sendOff(){
+send('OFF');
+}
 </script>
 
 
@@ -57,9 +59,8 @@ ws.send("REQUEST_"+document.getElementById("device").value+"_"+document.getEleme
 IP:<input id=ip type="text" value="ws://35.203.165.40:8060/ws"/>
 DEVICE:<input id=device type="text" value="DEV1"/>
 <button class="button" type="button" id="connectButton" onclick="connect()">connect</button><br>
-PinMode:<input id=componentMode type="text" value="1"/>
-PinNo:<input id=component type="text"/>
-PinValue:<input id=componentValue type="text"/>
-<button class="button" type="button" id="SendCommandButton" onclick="send()">Send</button>
+Component:<input id=component type="text" value="LED"/>
+<button class="button" type="button" id="OnCommandButton" onclick="sendOn()">ON</button>
+<button class="button" type="button" id="OffCommandButton" onclick="sendOff()">OFF</button>
 </body>
 </html>

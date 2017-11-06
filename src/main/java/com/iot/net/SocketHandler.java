@@ -37,7 +37,7 @@ public class SocketHandler extends TextWebSocketHandler {
             String id = m.split("_")[1];
             WebSocketSession dsocketSession =deviceSession.get(id);
             if (dsocketSession!=null && dsocketSession.isOpen()){
-                dsocketSession.sendMessage(new TextMessage(message.getPayload()));
+                dsocketSession.sendMessage(new TextMessage(m.split("_")[2]));
             }
             else {
                 if (dsocketSession!=null){
