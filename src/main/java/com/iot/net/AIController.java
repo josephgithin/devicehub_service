@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class AIController {
 
     @RequestMapping(path="command",method = {RequestMethod.POST,RequestMethod.GET})
-    public void command(@RequestBody String object) {
+    public String command(@RequestBody String object) {
         System.out.println(object);
+        return new String("OK");
+
     }
 
 }
