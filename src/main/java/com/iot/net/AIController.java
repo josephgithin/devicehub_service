@@ -15,6 +15,9 @@ public class AIController {
     public @ResponseBody
     WebHookResponse command(@RequestBody String object) {
         JSONObject jsonObject = new JSONObject(object);
+
+        System.out.println("JSON:"+jsonObject);
+
         JSONObject result =jsonObject.getJSONObject("result");
         JSONObject parameters = result.getJSONObject("parameters");
         JSONObject fulfillment = result.getJSONObject("fulfillment");
@@ -23,10 +26,17 @@ public class AIController {
         String state = parameters.getString("state");
         String device = parameters.getString("device");
         String st =state.equalsIgnoreCase("off")?"1":"0";
+
+        System.out.println(location+";"+state+";"+device);
         try {
-            SocketHandler.deviceSession.get(Constants.roomDeviceMapping.get(location))
+
+            String sessionforLocation =Constants.roomDeviceMapping.get(location);
+            String pinForDevice = Constants.objectPinMapping.get(device);
+
+            System.out.println("sessionforLocation:"+sessionforLocation+"pinForDevice:"+pinForDevice);
+            SocketHandler.deviceSession.get(sessionforLocation)
                     .sendMessage(new TextMessage("1;"
-                            +Constants.objectPinMapping.get(device)+";"
+                            +pinForDevice+";"
                             +st));
         } catch (IOException e) {
             e.printStackTrace();
