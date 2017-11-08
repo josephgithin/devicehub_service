@@ -15,9 +15,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Component
 public class SocketHandler extends TextWebSocketHandler {
 
-    List<WebSocketSession> sessions = new CopyOnWriteArrayList<>();
+   public static List<WebSocketSession> sessions = new CopyOnWriteArrayList<>();
 
-    ConcurrentHashMap<String,WebSocketSession> deviceSession = new ConcurrentHashMap<>();
+   public static ConcurrentHashMap<String,WebSocketSession> deviceSession = new ConcurrentHashMap<>();
 
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message)

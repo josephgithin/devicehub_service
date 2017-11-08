@@ -9,7 +9,12 @@ public class Application extends SpringBootServletInitializer {
 
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
 
+        Constants.objectPinMapping.put("lights","12");
+        Constants.objectPinMapping.put("fan","14");
+        Constants.roomDeviceMapping.put("living","DEV2");
+
+        SpringApplication.run(Application.class, args);
+
+    }
 }
