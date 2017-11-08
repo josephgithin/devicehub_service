@@ -1,16 +1,19 @@
 package com.iot.net;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-@Controller
-@RequestMapping("/ai")
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("ai")
 public class AIController {
 
-    @RequestMapping(method= RequestMethod.POST)
-    public void sayHello(@RequestBody String values) {
-        System.out.println(values);
+    @RequestMapping(path="command",method = {RequestMethod.POST,RequestMethod.GET})
+    public void command(@RequestBody String object) {
+        System.out.println(object);
     }
 
 }
