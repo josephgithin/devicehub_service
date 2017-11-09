@@ -54,7 +54,7 @@ ws.send("REQUEST_"+document.getElementById("device").value+"_"+document.getEleme
 
 </head>
 <body onload="connect()">
-IP:<input id=ip type="text" value="wss://www.alienz.ml/ws"/>
+IP:<input id=ip type="hidden" value="wss://www.alienz.ml/ws"/>
 DEVICE:<input id=device type="text" value="DEV1"/>
 <button class="button" type="button" id="connectButton" onclick="connect()">connect</button><br>
 PinMode:<input id=componentMode type="text" value="1"/>
