@@ -11,7 +11,7 @@ import java.io.IOException;
 @RequestMapping("ai")
 public class AIController {
 
-    @RequestMapping(path="command",method = {RequestMethod.POST,RequestMethod.GET})
+    @RequestMapping(value="command",method = {RequestMethod.POST,RequestMethod.GET})
     public @ResponseBody
     WebHookResponse command(@RequestBody String object) {
         JSONObject jsonObject = new JSONObject(object);
