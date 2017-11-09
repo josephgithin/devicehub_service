@@ -73,6 +73,7 @@ function send() {
             data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
             success: function(data) {
                 var respText = data.result.fulfillment.speech;
+                speakBack(respText);
                 console.log("Respuesta: " + respText);
                 setResponse(respText);
             },
@@ -81,9 +82,22 @@ function send() {
             }
         });
     }
+
+    function speakBack(val){
+
+
+        if('speechSynthesis' in window){
+        console.log("speaking...");
+        var speech = new SpeechSynthesisUtterance(val);
+        speech.voice = speechSynthesis.getVoices()[3];
+        speech.lang = 'en-US';
+        window.speechSynthesis.speak(speech);
+        }
+    }
+
     function setResponse(val) {
 	    //Edit "AI: " to change name
-        conversation.push("AI: " + val + '\r\n');
+        conversation.push("Chn: " + val + '\r\n');
         $("#response").text(conversation.join(""));
     }
     var conversation = [];
