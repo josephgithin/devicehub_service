@@ -141,14 +141,14 @@
             color: #d4d4d4;
         }
 
-        #rec    {
-background:url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpFImM9ozdO3u8YbWl0GFw471WRHwv3SCAJLoOE2VcrypoxmvH);
-width:40px;
-height:40px;
-background-repeat: no-repeat;
-background-size: 40px 40px;
-border: 0;
-}
+        #rec {
+            background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpFImM9ozdO3u8YbWl0GFw471WRHwv3SCAJLoOE2VcrypoxmvH);
+            width: 40px;
+            height: 40px;
+            background-repeat: no-repeat;
+            background-size: 40px 40px;
+            border: 0;
+        }
     </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -157,18 +157,46 @@ border: 0;
         var accessToken = "0a40e965e7ac4031b81ba2f6d6f745fe";
         var baseUrl = "https://api.dialogflow.com/v1/";
 
-        $(window).load(function(){ voices = window.speechSynthesis.getVoices(); })
+        function loadVoices() {
+            // Fetch the available voices.
+            var voices = speechSynthesis.getVoices();
+
+            // Loop through each of the voices.
+            voices.forEach(function (voice, i) {
+                console.log("voice-" + i + ":");
+                console.log(voice);
+            });
+        }
+        $(window).load(function () {
+
+
+            // Execute loadVoices.
+            loadVoices();
+            speakBack("");
+            window.speechSynthesis.onvoiceschanged = function (e) {
+                loadVoices();
+                insertChat("you", "Hello Dear", 3000);
+                speakBack("Hello Dear!");
+                insertChat("you", "I am Chundari here.", 4000);
+                speakBack("I am Choondari here.");
+            };
+            //-- Clear Chat
+            resetChat();
+
+            //-- Print Messages
+
+        });
 
         $(document).ready(function () {
 
-            $(".mytext").keypress(function(event) {
-            if (event.which == 13) {
-                event.preventDefault();
-                insertChat("me",$(".mytext").val());
-                send();
-                this.value = ''; //add this line to auto clear your text field so that you won't have to press backspace to clear the text field
-            }
-        });
+            $(".mytext").keypress(function (event) {
+                if (event.which == 13) {
+                    event.preventDefault();
+                    insertChat("me", $(".mytext").val());
+                    send();
+                    this.value = ''; //add this line to auto clear your text field so that you won't have to press backspace to clear the text field
+                }
+            });
             $("#rec").click(function (event) {
                 switchRecognition();
             });
@@ -215,13 +243,13 @@ border: 0;
         function updateRec() {
             //$("#rec").text(recognition ? "Stop" : "Speak");
             console.log("update rec!");
-            $("#rec").css('background-image', 'url(' + recognition ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpFImM9ozdO3u8YbWl0GFw471WRHwv3SCAJLoOE2VcrypoxmvH' :'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4vqKZWdqXMW_-kbEfsiitRYFhrFWQieHLezJHibiqzrQY6iXg'+ ')');
+            $("#rec").css('background-image', 'url(' + recognition ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpFImM9ozdO3u8YbWl0GFw471WRHwv3SCAJLoOE2VcrypoxmvH' : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4vqKZWdqXMW_-kbEfsiitRYFhrFWQieHLezJHibiqzrQY6iXg' + ')');
             console.log("updated rec");
         }
         function send() {
             var text = $(".mytext").val();
             $(".mytext").val("");
-            console.log("value:"+text);
+            console.log("value:" + text);
             //conversation.push("Me: " + text + '\r\n');
             $.ajax({
                 type: "POST",
@@ -244,18 +272,21 @@ border: 0;
             });
         }
 
+
         function speakBack(val) {
 
 
             if ('speechSynthesis' in window) {
                 console.log("speaking...");
                 var speech = new SpeechSynthesisUtterance(val);
-        var voices = window.speechSynthesis.getVoices();
-        speech.default = false;
-        speech.voice = voices.filter(function(voice) { return voice.name == 'Google UK English Female'; })[0];
-        speech.lang = 'en-GB';
-         speech.pitch=2.5;
-         speech.rate=0.8;
+                var voices = window.speechSynthesis.getVoices();
+                speech.default = false;
+
+                speech.voice = window.speechSynthesis.getVoices()[1];
+                speech.voice = voices.filter(function (voice) { return voice.name == 'Microsoft Zira Desktop - English (United States)'; })[0];
+                speech.lang = 'en-US';
+                speech.pitch = 1;
+                speech.rate = 0.8;
                 window.speechSynthesis.speak(speech);
             }
         }
@@ -337,14 +368,7 @@ border: 0;
             }
         });
 
-        //-- Clear Chat
-        resetChat();
 
-        //-- Print Messages
-        insertChat("you", "Hello Dear", 1500);
-        speakBack("Hello Dear!");
-        insertChat("you","I am Chundari here.",2000);
-        speakBack("I am Choondari here.")
 //-- NOTE: No use time on insertChat.
     </script>
 </head>
