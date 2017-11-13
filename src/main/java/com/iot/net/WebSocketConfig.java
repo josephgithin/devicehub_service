@@ -15,8 +15,14 @@ public class WebSocketConfig implements WebSocketConfigurer {
         return new SocketHandler();
     }
 
+    @Bean
+    public SessionWSocketHandler userSocketHandler(){
+        return new SessionWSocketHandler();
+    }
+
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         registry.addHandler(socketHandler(), "/ws").setAllowedOrigins("*");
+        registry.addHandler(userSocketHandler(), "/userws").setAllowedOrigins("*");
     }
 }

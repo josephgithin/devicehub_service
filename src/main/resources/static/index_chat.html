@@ -156,15 +156,15 @@
 
         var accessToken = "0a40e965e7ac4031b81ba2f6d6f745fe";
         var baseUrl = "https://api.dialogflow.com/v1/";
-
+        var connection;
         function loadVoices() {
             // Fetch the available voices.
             var voices = speechSynthesis.getVoices();
 
             // Loop through each of the voices.
             voices.forEach(function (voice, i) {
-                console.log("voice-" + i + ":");
-                console.log(voice);
+                //console.log("voice-" + i + ":");
+                // console.log(voice);
             });
         }
         $(window).load(function () {
@@ -194,13 +194,32 @@
                     event.preventDefault();
                     insertChat("me", $(".mytext").val());
                     send();
-                    this.value = ''; //add this line to auto clear your text field so that you won't have to press backspace to clear the text field
                 }
             });
             $("#rec").click(function (event) {
                 switchRecognition();
             });
+            connectWebsocket();
         });
+
+        function connectWebsocket() {
+
+            connection = new WebSocket(((window.location.protocol === "https:") ? "wss://" : "ws://") + window.location.host + "/userws");
+            connection.onopen = function () {
+                connection.send("{ 'type': 'connect', 'recipient': 'sender1' }"); //send a message to server once connection is opened.
+            };
+            connection.onerror = function (error) {
+                console.log('Error Logged: ' + error); //log errors
+            };
+            connection.onmessage = function (e) {
+                console.log('Received From Server: ' + e.data); //log the received message
+                var respText = e.data;
+                speakBack(respText);
+                console.log("Respuesta: " + respText);
+                setResponse(respText);
+            };
+        }
+
         var recognition;
         function startRecognition() {
             recognition = new webkitSpeechRecognition();
@@ -246,30 +265,13 @@
             $("#rec").css('background-image', 'url(' + recognition ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpFImM9ozdO3u8YbWl0GFw471WRHwv3SCAJLoOE2VcrypoxmvH' : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4vqKZWdqXMW_-kbEfsiitRYFhrFWQieHLezJHibiqzrQY6iXg' + ')');
             console.log("updated rec");
         }
+
         function send() {
-            var text = $(".mytext").val();
-            $(".mytext").val("");
-            console.log("value:" + text);
-            //conversation.push("Me: " + text + '\r\n');
-            $.ajax({
-                type: "POST",
-                url: baseUrl + "query?v=20150910",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                headers: {
-                    "Authorization": "Bearer " + accessToken
-                },
-                data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
-                success: function (data) {
-                    var respText = data.result.fulfillment.speech;
-                    speakBack(respText);
-                    console.log("Respuesta: " + respText);
-                    setResponse(respText);
-                },
-                error: function () {
-                    setResponse("Internal Server Error");
-                }
-            });
+            var text = $("#myinput").val();
+
+            // conversation.push("Me: " + text + '\r\n');
+            connection.send("{ 'type': 'message', 'recipient': 'sender1', 'speech':"+"'" +text+"'"+" }");
+            $("#myinput").val('');
         }
 
 
@@ -357,16 +359,15 @@
             $("ul").empty();
         }
 
-        $(".mytext").on("keypress", function (e) {
-            if (e.which == 13) {
-                var text = $(this).val();
-                if (text !== "") {
-                    insertChat("me", text);
-                    send();
-                    $(this).val('');
-                }
-            }
-        });
+        // $(".mytext").on("keypress", function (e) {
+        //     if (e.which == 13) {
+        //         var text = $(this).val();
+        //         if (text !== "") {
+        //             insertChat("me", text);
+        //             send();
+        //         }
+        //     }
+        // });
 
 
 //-- NOTE: No use time on insertChat.
@@ -379,7 +380,7 @@
     <div>
         <div class="msj-rta macro" style="margin:auto">
             <div class="text text-r" style="background:whitesmoke !important;display:inline-block; justify-content: center;">
-                <input class="mytext" placeholder="Type a message" />
+                <input class="mytext" id="myinput" placeholder="Type a message" />
                 <button id="rec"></button>
             </div>
         </div>
