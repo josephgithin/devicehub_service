@@ -1,0 +1,85 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v1.2.5.RELEASE)
+
+2017-11-14 08:23:46.004  INFO 1317 --- [           main] com.iot.net.Application                  : Starting Application v1.0-SNAPSHOT on vertx-server-instance with PID 1317 (/home/josephgithin/repos/devicehub_service/target/SpringSimpleWS-1.0-SNAPSHOT.jar started by josephgithin in /home/josephgithin/repos/devicehub_service/target)
+2017-11-14 08:23:46.093  INFO 1317 --- [           main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@62f1c90a: startup date [Tue Nov 14 08:23:46 UTC 2017]; root of context hierarchy
+2017-11-14 08:23:47.111  INFO 1317 --- [           main] a.ConfigurationClassBeanDefinitionReader : Skipping bean definition for [BeanMethod:name=socketHandler,declaringClass=com.iot.net.WebSocketConfig]: a definition for bean 'socketHandler' already exists. This top-level bean definition is considered as an override.
+2017-11-14 08:23:47.282  INFO 1317 --- [           main] o.s.b.f.s.DefaultListableBeanFactory     : Overriding bean definition for bean 'beanNameViewResolver': replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration; factoryMethodName=beanNameViewResolver; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/web/ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter; factoryMethodName=beanNameViewResolver; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/web/WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter.class]]
+2017-11-14 08:23:49.029  INFO 1317 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8060 (http)
+2017-11-14 08:23:49.797  INFO 1317 --- [           main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2017-11-14 08:23:49.802  INFO 1317 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.0.3
+2017-11-14 08:23:50.206  INFO 1317 --- [ost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2017-11-14 08:23:50.206  INFO 1317 --- [ost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 4116 ms
+2017-11-14 08:23:51.017  INFO 1317 --- [ost-startStop-1] o.s.b.c.e.ServletRegistrationBean        : Mapping servlet: 'dispatcherServlet' to [/]
+2017-11-14 08:23:51.035  INFO 1317 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-11-14 08:23:51.036  INFO 1317 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-11-14 08:23:51.541  INFO 1317 --- [           main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService  'defaultSockJsTaskScheduler'
+2017-11-14 08:23:51.600  INFO 1317 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/userws] onto handler of type [class org.springframework.web.socket.server.support.WebSocketHttpRequestHandler]
+2017-11-14 08:23:51.601  INFO 1317 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/ws] onto handler of type [class org.springframework.web.socket.server.support.WebSocketHttpRequestHandler]
+2017-11-14 08:23:51.964  INFO 1317 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@62f1c90a: startup date [Tue Nov 14 08:23:46 UTC 2017]; root of context hierarchy
+2017-11-14 08:23:52.088  INFO 1317 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/ai/command_rasa],methods=[POST || GET]}" onto public com.iot.net.WebHookResponse com.iot.net.AIController.commandRasa(java.lang.String)
+2017-11-14 08:23:52.090  INFO 1317 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/ai/message_rasa],methods=[POST || GET]}" onto public com.iot.net.WebHookResponse com.iot.net.AIController.messageRasa(java.lang.String)
+2017-11-14 08:23:52.090  INFO 1317 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/ai/command],methods=[POST || GET]}" onto public com.iot.net.WebHookResponse com.iot.net.AIController.command(java.lang.String)
+2017-11-14 08:23:52.095  INFO 1317 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest)
+2017-11-14 08:23:52.096  INFO 1317 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-11-14 08:23:52.103  INFO 1317 --- [           main] o.s.w.s.c.a.WebMvcConfigurerAdapter      : Adding welcome page: jar:file:/home/josephgithin/repos/devicehub_service/target/SpringSimpleWS-1.0-SNAPSHOT.jar!/static/index.html
+2017-11-14 08:23:52.118  INFO 1317 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Root mapping to handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2017-11-14 08:23:52.134  INFO 1317 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-11-14 08:23:52.138  INFO 1317 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-11-14 08:23:52.224  INFO 1317 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-11-14 08:23:52.379  INFO 1317 --- [           main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-11-14 08:23:52.483  INFO 1317 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8060 (http)
+2017-11-14 08:23:52.484  INFO 1317 --- [           main] com.iot.net.Application                  : Started Application in 7.228 seconds (JVM running for 11.215)
+2017-11-14 08:24:56.095  INFO 1317 --- [nio-8060-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2017-11-14 08:24:56.096  INFO 1317 --- [nio-8060-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
+2017-11-14 08:24:56.162  INFO 1317 --- [nio-8060-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 64 ms
+Connect:{"recipient":"sender1","type":"connect"}
+usersessions:1
+Added new Session
+sessions:1devices:0
+Removed Disconnected Session!
+sessions:0devices:1
+Removed Disconnected Session!
+sessions:0devices:0
+Connect:{"recipient":"sender1","type":"connect"}
+usersessions:1
+Added new Session
+sessions:1devices:0
+Connect:{"recipient":"sender1","type":"connect"}
+usersessions:1
+Added new Session
+sessions:2devices:0
+Removed Disconnected Session!
+sessions:0devices:1
+Removed Disconnected Session!
+sessions:1devices:0
+Connect:{"recipient":"sender1","type":"connect"}
+usersessions:1
+Added new Session
+sessions:2devices:0
+Removed Disconnected Session!
+sessions:0devices:1
+Removed Disconnected Session!
+sessions:1devices:0
+Removed Disconnected Session!
+sessions:0devices:1
+Removed Disconnected Session!
+sessions:0devices:0
+Connect:{"recipient":"sender1","type":"connect"}
+usersessions:1
+Added new Session
+sessions:1devices:0
+Removed Disconnected Session!
+sessions:0devices:1
+Removed Disconnected Session!
+sessions:0devices:0
+Connect:{"recipient":"sender1","type":"connect"}
+usersessions:1
+Added new Session
+sessions:1devices:0

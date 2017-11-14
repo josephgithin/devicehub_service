@@ -284,8 +284,8 @@
                 var voices = window.speechSynthesis.getVoices();
                 speech.default = false;
 
-                speech.voice = window.speechSynthesis.getVoices()[1];
-                speech.voice = voices.filter(function (voice) { return voice.name == 'Microsoft Zira Desktop - English (United States)'; })[0];
+                speech.voice = window.speechSynthesis.getVoices()[3];
+                //speech.voice = voices.filter(function (voice) { return voice.name == 'Microsoft Zira Desktop - English (United States)'; })[0];
                 speech.lang = 'en-US';
                 speech.pitch = 1;
                 speech.rate = 0.8;
