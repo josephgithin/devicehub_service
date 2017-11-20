@@ -153,7 +153,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript">
-
+        var welcome_flag = false;
         var accessToken = "0a40e965e7ac4031b81ba2f6d6f745fe";
         var baseUrl = "https://api.dialogflow.com/v1/";
         var connection;
@@ -174,11 +174,14 @@
             loadVoices();
             speakBack("");
             window.speechSynthesis.onvoiceschanged = function (e) {
+                if(!welcome_flag){
                 loadVoices();
                 insertChat("you", "Hello Dear", 3000);
                 speakBack("Hello Dear!");
                // insertChat("you", "I am Chundari here.", 4000);
                // speakBack("I am Choondari here.");
+               welcome_flag = true;
+               }
             };
             //-- Clear Chat
             resetChat();
